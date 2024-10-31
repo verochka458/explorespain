@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylespain.css">
+    <title>Spain Interactive Page</title>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // оценивание
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', (event) => {
+                const rating = event.target.getAttribute('data-rating');
+                document.querySelectorAll('.star').forEach(s => s.classList.remove('selected'));
+                event.target.classList.add('selected');
+                document.getElementById('rating-text').textContent = `You rated Spain: ${rating} star(s)!`;
+            });
+        });
+
+        // тема
+        const themeToggle = document.getElementById('theme-toggle');
+        let isDayMode = true;
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('night-mode');
+            isDayMode = !isDayMode;
+            themeToggle.textContent = isDayMode ? 'Toggle Night Mode' : 'Toggle Day Mode';
+        });
+
+        // рандомный факт
+        const facts = [
+            'Spain is home to the world’s oldest restaurant, operating since 1725.',
+            'Spain has more UNESCO World Heritage sites than any other country except Italy.',
+            'The Sagrada Família in Barcelona is still under construction after over 100 years.',
+            'Spain produces over 44% of the world’s olive oil.',
+            'Spanish is the second most spoken language in the world.'
+        ];
+
+        document.getElementById('fact-btn').addEventListener('click', () => {
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            document.getElementById('fact-text').textContent = randomFact;
+        });
+    });
+    </script>
+</head>
+<body class="background">
+    <div class="content">
+        <p class="centered">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPQ-ZhFFTG_ww40p7PlUEZesS5cwYWp_e26g&s" class="border" alt="flag">
+        </p>
+        <h1 class="main-title">Spain Interactive Page</h1>
+
+        <nav>
+            <a href="https://www.youtube.com/watch?v=Ue4p3CoNjv0" class="nav-link">Listen to Anthem</a>
+            <br>
+            <a href="spain.html" class="nav-link">Main Page</a>
+        </nav>
+
+        <section>
+            <h2>Rate your experience with Spain</h2>
+            <div class="stars">
+                <span class="star" data-rating="1">★</span>
+                <span class="star" data-rating="2">★</span>
+                <span class="star" data-rating="3">★</span>
+                <span class="star" data-rating="4">★</span>
+                <span class="star" data-rating="5">★</span>
+            </div>
+            <p id="rating-text">Select your rating.</p>
+        </section>
+
+        <section>
+            <h2>Change Theme</h2>
+            <button id="theme-toggle">Toggle Day/Night Mode</button>
+        </section>
+
+        <section>
+            <h2>Discover more facts about Spain</h2>
+            <button id="fact-btn">Get Random Fact</button>
+            <p id="fact-text"></p>
+        </section>
+
+        <footer>
+            <p>Author: Vera Issayeva</p>
+            <p><a href="mailto:230469@astanait.edu.kz">230469@astanait.edu.kz</a></p>
+        </footer>
+    </div>
+</body>
+</html>

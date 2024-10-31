@@ -1,0 +1,93 @@
+.background {
+    background-color: #FFD700;
+}
+
+.content {
+    margin-left: 400px;
+    margin-right: 400px;
+    padding: 20px;
+    background-color: white;
+    border: 20px solid #FFA500;
+    font-family: "Comic Sans MS", monospace;
+}
+
+.main-title {
+    text-align: center;
+    font-size: 30px;
+}
+
+h2 {
+    color: #8B4513;
+    font-size: 20px;
+}
+
+p, label, select, textarea {
+    font-size: 20px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.border {
+    border: 5px solid #000000;
+}
+
+.nav-link {
+    font-size: 18px;
+    color: blue;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+input, select, textarea {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #FFA500;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #FF8C00;
+}
+
+figure {
+    margin-top: 20px;
+}
+
+blockquote {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #FFF8DC;
+    border-left: 10px solid #FFA500;
+}
+
+#name {
+    border-color: pink;
+}
+
+.night-mode {
+    background-color: #2C3E50;
+    color: white;
+}
+
+.night-mode .content {
+    background-color: #34495E;
+    border-color: #2C3E50;
+}
+
+.night-mode .nav-link {
+    color: #FFD700;
+}
