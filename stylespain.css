@@ -85,9 +85,208 @@ blockquote {
 
 .night-mode .content {
     background-color: #34495E;
-    border-color: #2C3E50;
+    border-color:  #1b2631;
 }
 
 .night-mode .nav-link {
     color: #FFD700;
+}
+
+.night-mode button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color:  #1b2631;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.night-mode button:hover {
+    background-color:  #1b2631;
+}
+
+.night-mode h2 {
+    color: white;
+    font-size: 20px;
+}
+
+.night-mode blockquote {
+    margin-top: 20px;
+    padding: 10px;
+    background-color:  #3f5973;
+    border-left: 10px solid  #1b2631;
+}
+
+.star {
+    cursor: pointer
+}
+.selected {
+    color: darkorange
+}
+
+
+/* Общие стили для всех экранов */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Адаптация для экранов шириной до 1024px (планшеты) */
+@media (max-width: 1024px) {
+    .content {
+        margin-left: 50px;
+        margin-right: 50px;
+        padding: 15px;
+    }
+
+    .main-title {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    p, label, select, textarea {
+        font-size: 18px;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-link {
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+}
+
+/* Адаптация для экранов шириной до 768px (большие смартфоны) */
+@media (max-width: 768px) {
+    .content {
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 10px;
+    }
+
+    .main-title {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    p, label, select, textarea {
+        font-size: 16px;
+    }
+
+    nav {
+        text-align: center;
+    }
+
+    .nav-link {
+        font-size: 14px;
+    }
+
+    input, select, textarea {
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+/* Адаптация для экранов шириной до 480px (мобильные устройства) */
+@media (max-width: 480px) {
+    .content {
+        margin: 0;
+        padding: 10px;
+    }
+
+    .main-title {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 14px;
+    }
+
+    p, label, select, textarea {
+        font-size: 14px;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+    }
+
+    .nav-link {
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    footer {
+        font-size: 12px;
+        text-align: center;
+    }
+}
+#profile-picture-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#profile-picture {
+    border: 2px solid #ccc;
+    padding: 5px;
+}
+
+/* Стили для вопросов (класс .question) */
+.question {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer; /* Указывает, что на элемент можно кликнуть */
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f9f9f9; /* Светлый фон для выделения */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.question:hover {
+    background-color: #f1f1f1; /* Изменение фона при наведении */
+}
+
+/* Стили для ответа (класс .cont) */
+.cont {
+    font-size: 16px;
+    color: #555;
+    padding: 10px;
+    border-left: 3px solid #007BFF; /* Синяя линия для выделения */
+    margin: 0 0 10px 10px;
+    display: none; /* Скрываем контент по умолчанию */
+    background-color: #fdfdfd; /* Немного светлый фон */
+    border-radius: 5px;
 }
