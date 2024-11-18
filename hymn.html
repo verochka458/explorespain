@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylespain.css">
     <title>Hymn of Spain</title>
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Смена темы
+        const nightMode = localStorage.getItem("nightMode") === "true";
+        document.body.classList.toggle("night-mode", nightMode);
+
+        document.getElementById("theme-toggle").addEventListener("click", () => {
+            document.body.classList.toggle("night-mode");
+            localStorage.setItem("nightMode", document.body.classList.contains("night-mode"));
+        });
+    });
+</script>
+
+    
 </head>
 <body class="background">
     <div class="content">
@@ -12,11 +27,11 @@
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPQ-ZhFFTG_ww40p7PlUEZesS5cwYWp_e26g&s" class="border" alt="flag">
         </p>
         <h1 class="main-title">Hymn of Spain</h1>
-
+<button id="theme-toggle">Toggle Theme</button>
         <nav>
             <a href="https://www.youtube.com/watch?v=Ue4p3CoNjv0" class="nav-link">Listen</a>
             <br>
-            <a href="spain.html" class="nav-link">Main Page</a>
+            <a href="index.html" class="nav-link">Main Page</a>
         </nav>
 
         <section>
@@ -65,5 +80,6 @@
             <p><a href="mailto:230469@astanait.edu.kz">230469@astanait.edu.kz</a></p>
         </footer>
     </div>
+
 </body>
 </html>
