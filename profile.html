@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylespain.css">
+    <title>Profile</title>
+   
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let username = localStorage.getItem("username")
+        if (username) {
+            document.getElementById("welcomeUsername").innerHTML = `Username: ${username}`;
+        }
+        
+        // оценивание
+        let starCounter = 0
+        document.querySelectorAll('.star').forEach(star => {
+            let starId = starCounter;
+            starCounter++;
+            star.addEventListener('click', (event) => {
+                const rating = event.target.getAttribute('data-rating');
+                document.querySelectorAll('.star').forEach(s => s.classList.remove('selected'));
+                event.target.classList.add('selected');
+                for (let i = 0; i < starId; i++) {
+                    document.getElementsByClassName("star")[i].classList.add('selected')
+                }
+                document.getElementById('rating-text').textContent = `You rated Spain: ${rating} star(s)!`;
+            });
+        });
+
+        // тема
+        // Загрузка темы из localStorage
+        const nightMode = localStorage.getItem("nightMode") === "true";
+        document.body.classList.toggle("night-mode", nightMode);
+
+        // Смена темы
+        document.getElementById("theme-toggle").addEventListener("click", () => {
+            document.body.classList.toggle("night-mode");
+            localStorage.setItem("nightMode", document.body.classList.contains("night-mode"));
+        });
+
+       
+
+
+        // рандомный факт
+        const facts = [
+            'Spain is home to the world’s oldest restaurant, operating since 1725.',
+            'Spain has more UNESCO World Heritage sites than any other country except Italy.',
+            'The Sagrada Família in Barcelona is still under construction after over 100 years.',
+            'Spain produces over 44% of the world’s olive oil.',
+            'Spanish is the second most spoken language in the world.'
+        ];
+
+        document.getElementById('fact-btn').addEventListener('click', () => {
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            document.getElementById('fact-text').textContent = randomFact;
+        });
+    });
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Проверяем, есть ли сохранённое изображение в localStorage
+    const savedImage = localStorage.getItem('profilePicture');
+    const profilePicture = document.getElementById('profile-picture');
+
+    if (savedImage) {
+        profilePicture.src = savedImage;
+        profilePicture.style.display = 'block';
+    }
+
+    // Обработчик для кнопки сохранения изображения
+    document.getElementById('save-profile-picture').addEventListener('click', () => {
+        const fileInput = document.getElementById('profile-picture-input');
+        const file = fileInput.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const imageData = event.target.result;
+                localStorage.setItem('profilePicture', imageData); // Сохраняем изображение в localStorage
+                profilePicture.src = imageData;
+                profilePicture.style.display = 'block';
+                alert('Profile picture saved!');
+            };
+            reader.readAsDataURL(file); // Конвертируем файл в Base64
+        } else {
+            alert('Please select a file to upload.');
+        }
+    });
+});
+
+    </script>
+</head>
+<body class="background">
+    <div class="content">
+        <button id="theme-toggle">Toggle Theme</button>
+     
+        <nav>
+            <a href="https://www.youtube.com/watch?v=Ue4p3CoNjv0" class="nav-link">Listen to Anthem</a>
+            <br>
+            <a href="spain.html" class="nav-link">Main Page</a>
+        </nav>
+        <h1 class="main-title">Profile</h1>
+        <h2 id="welcomeUsername">No account created</h2>
+
+<section>
+    <h2>Profile Picture</h2>
+    <input type="file" id="profile-picture-input" accept="image/*">
+    <button id="save-profile-picture">Save Picture</button>
+    <div id="profile-picture-container">
+        <img id="profile-picture" alt="Profile Picture" src="" style="display: none; width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+    </div>
+</section>
+
+
+
+
+        <section>
+            <h2>Rate your experience with this webpage</h2>
+            <div class="stars">
+                <span class="star" data-rating="1">★</span>
+                <span class="star" data-rating="2">★</span>
+                <span class="star" data-rating="3">★</span>
+                <span class="star" data-rating="4">★</span>
+                <span class="star" data-rating="5">★</span>
+            </div>
+            <p id="rating-text">Select your rating.</p>
+        </section>
+        
+
+        <section>
+            <h2>Discover more facts about Spain</h2>
+            <button id="fact-btn">Get Random Fact</button>
+            <p id="fact-text"></p>
+        </section>
+
+        
+        
+    </div>
+</body>
+</html>
