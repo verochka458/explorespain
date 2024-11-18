@@ -4,84 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylespain.css">
-    <title>Spain Interactive Page</title>
-    
+    <title>About Spain!</title>
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // оценивание
-        document.querySelectorAll('.star').forEach(star => {
-            star.addEventListener('click', (event) => {
-                const rating = event.target.getAttribute('data-rating');
-                document.querySelectorAll('.star').forEach(s => s.classList.remove('selected'));
-                event.target.classList.add('selected');
-                document.getElementById('rating-text').textContent = `You rated Spain: ${rating} star(s)!`;
+        document.addEventListener("DOMContentLoaded", () => {
+            // Загрузка темы из localStorage
+            const nightMode = localStorage.getItem("nightMode") === "true";
+            document.body.classList.toggle("night-mode", nightMode);
+
+            // Смена темы
+            document.getElementById("theme-toggle").addEventListener("click", () => {
+                document.body.classList.toggle("night-mode");
+                localStorage.setItem("nightMode", document.body.classList.contains("night-mode"));
+            });
+
+            // Проверка аутентификации
+            const username = localStorage.getItem("username");
+            if (username) {
+                document.getElementById("login-form").style.display = "none";
+                document.getElementById("welcome-message").textContent = `Welcome, ${username}!`;
+                document.getElementById("logout-button").style.display = "inline";
+                document.getElementById("profile-button").style.display = "inline";
+            }
+
+            // Форма входа
+            document.getElementById("login-form").addEventListener("submit", (event) => {
+                event.preventDefault();
+                const username = document.getElementById("username").value;
+                localStorage.setItem("username", username);
+                location.reload();
+            });
+
+            // Выход
+            document.getElementById("logout-button").addEventListener("click", () => {
+                localStorage.removeItem("username");
+                location.reload();
             });
         });
 
-        // тема
-        const themeToggle = document.getElementById('theme-toggle');
-        let isDayMode = true;
+        // Валидация формы
+        function validateForm(event) {
+            event.preventDefault();
+            let name = document.getElementById("name").value;
+            let lastName = document.getElementById("last-name").value;
+            let gender = document.getElementById("gender").value;
+            let review = document.getElementById("review").value;
+            let errorMessages = [];
 
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('night-mode');
-            isDayMode = !isDayMode;
-            themeToggle.textContent = isDayMode ? 'Toggle Night Mode' : 'Toggle Day Mode';
-        });
+            if (name === "") errorMessages.push("Name is required.\n");
+            if (lastName === "") errorMessages.push("Last name is required.\n");
+            if (gender === "") errorMessages.push("Gender is required.\n");
+            if (review === "") errorMessages.push("Opinion is required.\n");
 
-        // рандомный факт
-        const facts = [
-            'Spain is home to the world’s oldest restaurant, operating since 1725.',
-            'Spain has more UNESCO World Heritage sites than any other country except Italy.',
-            'The Sagrada Família in Barcelona is still under construction after over 100 years.',
-            'Spain produces over 44% of the world’s olive oil.',
-            'Spanish is the second most spoken language in the world.'
-        ];
-
-        document.getElementById('fact-btn').addEventListener('click', () => {
-            const randomFact = facts[Math.floor(Math.random() * facts.length)];
-            document.getElementById('fact-text').textContent = randomFact;
-        });
-    });
+            if (errorMessages.length > 0) {
+                alert(errorMessages.join('')); 
+            } else {
+                alert("Form submitted successfully!");
+                document.getElementById("review-form").submit();
+            }
+        }
     </script>
 </head>
 <body class="background">
     <div class="content">
-        <p class="centered">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPQ-ZhFFTG_ww40p7PlUEZesS5cwYWp_e26g&s" class="border" alt="flag">
-        </p>
-        <h1 class="main-title">Spain Interactive Page</h1>
+        <!-- Форма входа -->
+        <div id="login-section">
+            <form id="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <button type="submit">Login</button>
+            </form>
+            <p id="welcome-message"></p>
+            <button id="logout-button" style="display:none">Logout</button>
+            <button id="profile-button" style="display:none" onclick="document.location='profile.html'">Profile</button>
+        </div>
 
+        <button id="theme-toggle">Toggle Theme</button>
+        <p class="centered">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPQ-ZhFFTG_ww40p7PlUEZesS5cwYWp_e26g&s" class="border" alt="Spain flag">
+        </p>
+
+        <!-- Основное содержимое -->
+        <h1 class="main-title">Spain</h1>
         <nav>
-            <a href="https://www.youtube.com/watch?v=Ue4p3CoNjv0" class="nav-link">Listen to Anthem</a>
-            <br>
-            <a href="spain.html" class="nav-link">Main Page</a>
+        
+            <a href="faq.html" class="nav-link">FAQ</a><br>
+            <a href="hymn.html" class="nav-link">Hymn</a><br>
         </nav>
 
         <section>
-            <h2>Rate your experience with Spain</h2>
-            <div class="stars">
-                <span class="star" data-rating="1">★</span>
-                <span class="star" data-rating="2">★</span>
-                <span class="star" data-rating="3">★</span>
-                <span class="star" data-rating="4">★</span>
-                <span class="star" data-rating="5">★</span>
-            </div>
-            <p id="rating-text">Select your rating.</p>
+            <h2>Spain History</h2>
+            <p>The history of Spain dates to contact between the pre-Roman peoples of the Mediterranean coast of the Iberian Peninsula made with the Greeks and Phoenicians. During Classical Antiquity, the peninsula was the site of multiple successive colonizations of Greeks, Carthaginians, and Romans.</p>
+        </section>
+        
+        <section>
+            <h2>Spain Flag's Symbol</h2>
+            <p>The symbol on the flag of Spain is the coat of arms. It features symbols from the constituent kingdoms of Spain.</p>
         </section>
 
-        <section>
-            <h2>Change Theme</h2>
-            <button id="theme-toggle">Toggle Day/Night Mode</button>
-        </section>
+        <figure>
+            <img src="https://www.suspanish.com/blog/wp-content/uploads/2018/12/natuurwonderen-spanje.jpg" alt="Nature of Spain" style="width:100%">
+            <figcaption>Fig.1 - Nature of Spain.</figcaption>
+        </figure>
 
-        <section>
-            <h2>Discover more facts about Spain</h2>
-            <button id="fact-btn">Get Random Fact</button>
-            <p id="fact-text"></p>
-        </section>
+        <blockquote cite="https://www.spain.info/en/nature/">
+            Mountains, volcanoes, wetlands, forests, rivers, valleys, cliffs, lakes... There are so many different environments in Spain to make you feel brand new.
+        </blockquote>
+
+        <h2>What do You think about Spain?</h2>
+        <form id="review-form" onsubmit="validateForm(event)">
+            <label for="name">Your name</label><br>
+            <input type="text" id="name" name="name" placeholder="Your name" ><br>
+            <label for="last-name">Your last name</label><br>
+            <input type="text" id="last-name" name="last-name" placeholder="Your last name" ><br>
+            <label for="gender">Your gender</label><br>
+            <select id="gender" name="gender" >
+                <option value="">...</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select><br>
+            <textarea id="review" name="review" rows="5" placeholder="Your opinion" ></textarea><br>
+            <button type="submit">Send</button>
+        </form>
 
         <footer>
-            <p>Author: Vera Issayeva</p>
+            <p class="centered">Author: Vera Issayeva</p>
             <p><a href="mailto:230469@astanait.edu.kz">230469@astanait.edu.kz</a></p>
         </footer>
     </div>
