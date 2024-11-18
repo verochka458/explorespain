@@ -15,14 +15,14 @@
         <h1 class="main-title">Spain</h1>
 
         <nav>
-            <a href="nature.html" class="nav-link">Nature</a>
-            <br>
+          
             <a href="hymn.html" class="nav-link">Hymn</a>
             <br>
-            <a href="spain.html" class="nav-link">Main Page</a>
+            <a href="index.html" class="nav-link">Main Page</a>
         </nav>
         
-        
+         <button id="theme-toggle">Toggle Theme</button>
+
         
 <h2>FAQs</h2>
     <div class="question">What is the capital of Spain?</div>
@@ -32,34 +32,32 @@
     <div class="cont">Euro</div>
 
     <script>
-        document.querySelectorAll('.question').forEach(item => {
-            item.addEventListener('click', function() {
-                this.classList.toggle('active');
-                let content = this.nextElementSibling;
-                content.style.display = content.style.display === "block" ? "none" : "block";
-            });
+        document.addEventListener("DOMContentLoaded", () => {
+    // Смена темы
+    const nightMode = localStorage.getItem("nightMode") === "true";
+    document.body.classList.toggle("night-mode", nightMode);
+
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        document.body.classList.toggle("night-mode");
+        localStorage.setItem("nightMode", document.body.classList.contains("night-mode"));
+    });
+
+    // Обработка FAQ
+    document.querySelectorAll('.question').forEach(item => {
+        item.addEventListener('click', function() {
+            this.classList.toggle('active');
+            let content = this.nextElementSibling;
+            content.style.display = content.style.display === "block" ? "none" : "block";
         });
-    </script>
-        
-       <button id="openPopup">Subscribe</button>
+    });
 
-    <div id="overlay"></div>
+    // Обработка всплывающего окна
+    const popup = document.getElementById('popup');
+    const overlay = document.getElementById('overlay');
+    const openPopup = document.getElementById('openPopup');
+    const closePopup = document.getElementById('closePopup');
 
-    <div id="popup">
-        <h3>Subscribe to our newsletter</h3>
-        <form>
-            <input type="text" placeholder="Your Email" required><br><br>
-            <button type="submit">Submit</button>
-            <button type="button" id="closePopup">Close</button>
-        </form>
-    </div>
-        
-    <script>
-        const popup = document.getElementById('popup');
-        const overlay = document.getElementById('overlay');
-        const openPopup = document.getElementById('openPopup');
-        const closePopup = document.getElementById('closePopup');
-
+    if (popup && overlay && openPopup && closePopup) {
         openPopup.addEventListener('click', () => {
             popup.style.display = 'block';
             overlay.style.display = 'block';
@@ -74,44 +72,13 @@
             popup.style.display = 'none';
             overlay.style.display = 'none';
         });
+    }
+});
+
     </script>
         
         
-         <button id="changeColor">Change Background Color</button>
-
-    <script>
-        const button = document.getElementById('changeColor');
-const colors = ['red', 'green', 'blue', 'yellow', 'purple'];
-
-button.addEventListener('click', () => {
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    document.body.style.color = randomColor;
-});
-</script>
-        
-        
-        <div id="dateTime"></div>
-
-    <script>
-        function updateDateTime() {
-    const now = new Date();
-    const formattedDate = now.toLocaleString('en-US', {
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric', 
-        hour: '2-digit', 
-        minute: '2-digit'
-    });
-    document.getElementById('dateTime').innerText = formattedDate;
-}
-
-setInterval(updateDateTime, 1000);
-updateDateTime();
-
-        </script>
-        
-        
-        
+      
         
         
         
